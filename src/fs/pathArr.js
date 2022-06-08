@@ -1,8 +1,3 @@
+import * as path from 'path';
 
-export const getPathArr = (path) => {
-  let pathArr = [];
-  if (process.env.HOME) {
-    pathArr = path.split('\\');
-  }
-  return pathArr;
-}
+export const getPathArr = dirPath => dirPath.split(path.sep);

@@ -1,5 +1,5 @@
-export const getPath = (pathArr) => {
-  let path = '';
-  if (process.env.HOME) path = pathArr.join('\\');
-  return path;
+import * as path from 'path';
+
+export const getPath = pathArr => {
+  return (pathArr.length > 1) ? path.join(...pathArr) : pathArr[0];
 }
