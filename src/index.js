@@ -32,11 +32,16 @@ printCurrentDir();
 rl.on('line', line => {
   if (line === '.exit') rl.close();
   else {
-    if (line === 'up') {
-      if (currentPathArr.length > 1) currentPathArr = ACTIONS.up(currentPathArr);
-    } 
-
-
+    const action = line.split(' ')[0];
+    if (ACTIONS[action]) {
+      switch (action) {
+        case 'up':
+          if (currentPathArr.length > 1) currentPathArr = ACTIONS[action](currentPathArr);
+          break;
+        default:
+          
+      } 
+    } else console.log('\x1b[31mInvalid input');
     printCurrentDir();
   }
 });
