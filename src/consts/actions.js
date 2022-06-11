@@ -1,9 +1,10 @@
 import { deleteLastElement } from '../fs/del-last-el.js';
 import { list } from '../fs/list.js';
+import { cd } from '../fs/cd.js';
 
 export const ACTIONS = {
   up: (currentPathArr) => deleteLastElement(currentPathArr),
-  'cd path_to_directory': 'Go to dedicated folder from current directory',
+  cd: (dir, currentPathArr) => cd(dir, currentPathArr),
   ls: (currentDir) => list(currentDir),
   'cat path_to_file': `Read file and print it's content`,
   'add new_file_name': 'Create empty file in current working directory',

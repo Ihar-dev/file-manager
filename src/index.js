@@ -39,7 +39,11 @@ rl.on('line', async line => {
     if (ACTIONS[action]) {
       switch (action) {
         case 'up':
-          if (currentPathArr.length > 1) currentPathArr = ACTIONS[action](currentPathArr);
+          currentPathArr = ACTIONS[action](currentPathArr);
+          printCurrentDir();
+          break;
+        case 'cd':
+          currentPathArr = ACTIONS[action](line.slice(3, line.length), currentPathArr);
           printCurrentDir();
           break;
         case 'ls':
