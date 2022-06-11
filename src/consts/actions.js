@@ -4,7 +4,7 @@ import { list } from '../fs/list.js';
 export const ACTIONS = {
   up: (currentPathArr) => deleteLastElement(currentPathArr),
   'cd path_to_directory': 'Go to dedicated folder from current directory',
-  ls: (currentPathArr, currentDir) => list(currentPathArr, currentDir),
+  ls: (currentDir) => list(currentDir),
   'cat path_to_file': `Read file and print it's content`,
   'add new_file_name': 'Create empty file in current working directory',
   'rn path_to_file new_filename': 'Rename file',

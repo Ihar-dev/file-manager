@@ -43,7 +43,7 @@ rl.on('line', async line => {
           printCurrentDir();
           break;
         case 'ls':
-          ACTIONS[action](currentPathArr, currentDir);
+          ACTIONS[action](currentDir);
           break;
         default:
 
