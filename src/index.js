@@ -32,7 +32,7 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.on('line', line => {
+rl.on('line', async line => {
   if (line === '.exit') rl.close();
   else {
     const action = line.split(' ')[0];
@@ -40,12 +40,15 @@ rl.on('line', line => {
       switch (action) {
         case 'up':
           if (currentPathArr.length > 1) currentPathArr = ACTIONS[action](currentPathArr);
+          printCurrentDir();
+          break;
+        case 'ls':
+          ACTIONS[action](currentPathArr, currentDir);
           break;
         default:
 
       } 
     } else console.log('\x1b[31mInvalid input');
-    printCurrentDir();
   }
 });
 
