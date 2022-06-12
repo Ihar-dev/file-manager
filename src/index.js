@@ -56,6 +56,12 @@ rl.on('line', async line => {
           ACTIONS.rn(oldFileName, newFileName, currentDir);
           dirPrintMode = false;
           break;
+        case 'cp':
+          const oldFilePath = line.split(' ')[1];
+          const newDirName = line.split(' ')[2];
+          ACTIONS.cp(oldFilePath, newDirName, currentDir);
+          dirPrintMode = false;
+          break;
         default:
       } 
     } else {
