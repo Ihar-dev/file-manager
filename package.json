@@ -1,0 +1,22 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "file-manager task for RSSchool",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd src && node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ihar-dev/file-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ihar-dev/file-manager/issues"
+  },
+  "homepage": "https://github.com/Ihar-dev/file-manager#readme"
+}
