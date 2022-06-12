@@ -77,6 +77,10 @@ rl.on('line', async line => {
         case 'os':
           ACTIONS.os(line.slice(5, line.length));
           break;
+        case 'hash':
+          ACTIONS.hash(line.slice(5, line.length), currentDir);
+          dirPrintMode = false;
+          break;
         default:
       } 
     } else {
