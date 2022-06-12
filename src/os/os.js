@@ -15,6 +15,10 @@ export const osMethods = async mode => {
         console.log(`Clock rate is ${proc.speed} GHz`);
       })
       break;
+    case 'homedir':
+      const homedir = os.homedir();
+      console.log(`Home directory is ${homedir}`);
+      break;
     default:
   } 
 }
