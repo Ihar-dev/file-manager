@@ -6,6 +6,7 @@ import { rn } from '../fs/rn.js';
 import { cp } from '../fs/cp.js';
 import { rm } from '../fs/rm.js';
 import { calculateHash } from '../fs/hash.js';
+import { compress } from '../fs/compress.js';
 import { osMethods } from '../os/os.js';
 
 export const ACTIONS = {
@@ -20,6 +21,6 @@ export const ACTIONS = {
   rm: (fileToDeletePath, currentDir) => rm(fileToDeletePath, currentDir),
   os: mode => osMethods(mode),
   hash: (filePath, currentDir) => calculateHash(filePath, currentDir),
-  'compress path_to_file path_to_destination': 'Compress file',
+  compress: (oldFilePath, newDirName, currentDir) => compress(oldFilePath, newDirName, currentDir),
   'decompress path_to_file path_to_destination': 'Decompress file'
 }
