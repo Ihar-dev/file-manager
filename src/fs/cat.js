@@ -2,12 +2,12 @@ import * as path from 'path';
 import { access, stat } from 'fs/promises';
 import { open } from 'fs/promises';
 
-export const cat = async (dir, currentDir) => {
+export const cat = async (file, currentDir) => {
   const printCurrentDir = () => console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
 
-  const readFile = async dir => {
+  const readFile = async file => {
     try {
-      const fd = await open(dir);
+      const fd = await open(file);
       const myReadStream = fd.createReadStream();
 
       myReadStream.on('data', chunk => {
@@ -21,13 +21,13 @@ export const cat = async (dir, currentDir) => {
     }
   }
 
-  const checkDir = async dir => {
+  const checkDir = async file => {
     try {
-      await access(dir);
-      const stats = await stat(dir);
-      if (stats.isFile()) readFile(dir);
+      await access(file);
+      const stats = await stat(file);
+      if (stats.isFile()) readFile(file);
       else {
-        console.log(`\x1b[31m${dir} is not a file`);
+        console.log(`\x1b[31m${file} is not a file`);
         printCurrentDir();
       }
     } catch {
@@ -36,7 +36,7 @@ export const cat = async (dir, currentDir) => {
     }
   }
 
-  dir = path.normalize(dir);
-  if (!path.isAbsolute(dir)) dir = path.join(currentDir, dir);
-  checkDir(dir);
+  file = path.normalize(file);
+  if (!path.isAbsolute(file)) file = path.join(currentDir, file);
+  checkDir(file);
 }

@@ -46,6 +46,10 @@ rl.on('line', async line => {
           ACTIONS.cat(line.slice(4, line.length), currentDir);
           dirPrintMode = false;
           break;
+        case 'add':
+          ACTIONS.add(line.slice(4, line.length), currentDir);
+          dirPrintMode = false;
+          break;
         default:
       } 
     } else {
