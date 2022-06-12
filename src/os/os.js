@@ -23,6 +23,10 @@ export const osMethods = async mode => {
       const username = os.userInfo().username;
       console.log(`Current system user name is ${username}`);
       break;
+    case 'architecture':
+      const architecture = os.arch();
+      console.log(`Current CPU architecture is ${architecture}`);
+      break;
     default:
   } 
 }

@@ -18,7 +18,6 @@ export const ACTIONS = {
   mv: (oldFilePath, newDirName, currentDir, moveMode) => cp(oldFilePath, newDirName, currentDir, moveMode),
   rm: (fileToDeletePath, currentDir) => rm(fileToDeletePath, currentDir),
   os: mode => osMethods(mode),
-  'os --architecture': 'Get CPU architecture',
   'hash path_to_file': 'Calculate hash for file',
   'compress path_to_file path_to_destination': 'Compress file',
   'decompress path_to_file path_to_destination': 'Decompress file'
