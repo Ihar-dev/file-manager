@@ -87,6 +87,12 @@ rl.on('line', async line => {
           ACTIONS.compress(oldFilePath, newDirName, currentDir);
           dirPrintMode = false;
           break;
+        case 'decompress':
+          oldFilePath = line.split(' ')[1];
+          newDirName = line.split(' ')[2];
+          ACTIONS.decompress(oldFilePath, newDirName, currentDir);
+          dirPrintMode = false;
+          break;
         default:
       } 
     } else {

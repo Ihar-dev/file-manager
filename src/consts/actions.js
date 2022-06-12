@@ -7,6 +7,7 @@ import { cp } from '../fs/cp.js';
 import { rm } from '../fs/rm.js';
 import { calculateHash } from '../fs/hash.js';
 import { compress } from '../fs/compress.js';
+import { decompress } from '../fs/decompress.js';
 import { osMethods } from '../os/os.js';
 
 export const ACTIONS = {
@@ -22,5 +23,5 @@ export const ACTIONS = {
   os: mode => osMethods(mode),
   hash: (filePath, currentDir) => calculateHash(filePath, currentDir),
   compress: (oldFilePath, newDirName, currentDir) => compress(oldFilePath, newDirName, currentDir),
-  'decompress path_to_file path_to_destination': 'Decompress file'
+  decompress: (oldFilePath, newDirName, currentDir) => decompress(oldFilePath, newDirName, currentDir),
 }

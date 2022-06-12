@@ -1,34 +1,41 @@
 import * as path from 'path';
 import { access, stat } from 'fs/promises';
 import { mkdir } from 'fs/promises';
-import * as zlib from 'zlib';
-import fs from 'fs';
+import { createReadStream, createWriteStream } from 'fs';
+import { BrotliDecompress } from 'zlib';
 
-export const compress = async (oldFilePath, newDirName, currentDir) => {
+export const decompress = async (oldFilePath, newDirName, currentDir) => {
   const printCurrentDir = () => console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
 
   const copyOldFile = async () => {
+    const prevFilePath = oldFilePath;
+    const nextFilePath = path.join(newDirName, path.parse(oldFilePath).base);
     try {
-      const prevFilePath = oldFilePath;
-      const nextFilePath = path.join(newDirName, path.parse(oldFilePath).base);
       await mkdir(newDirName, {
         recursive: true
       });
-
-      const gzip = zlib.createBrotliCompress();
-      const myReadStream = fs.createReadStream(prevFilePath);
-      const myWritableStream = fs.createWriteStream(nextFilePath);
-      myReadStream.pipe(gzip).pipe(myWritableStream);
-      
-      myWritableStream.on('finish', () => {
-        printCurrentDir();
-      });
-
-      console.log('File compressed');
     } catch (error) {
       console.log('Operation is not permitted!');
       printCurrentDir();
     }
+
+    const myReadStream = createReadStream(prevFilePath);
+    const myWritableStream = createWriteStream(nextFilePath);
+
+    myReadStream.on('error', () => {
+      console.log(`Operation failed`);
+    });
+
+    myWritableStream.on('error', () => {
+      console.log(`Operation failed`);
+    });
+
+    myReadStream.pipe(BrotliDecompress()).pipe(myWritableStream);
+
+    myWritableStream.on('finish', () => {
+      console.log('File decompressed');
+      printCurrentDir();
+    });
   }
 
   const checkDir = async file => {
