@@ -1,13 +1,14 @@
 import { list } from '../fs/list.js';
 import { cd } from '../fs/cd.js';
 import { cat } from '../fs/cat.js';
+import { add } from '../fs/add.js';
 
 export const ACTIONS = {
   up: async (currentDir) => await cd('..', currentDir),
   cd: async (dir, currentDir) => await cd(dir, currentDir),
   ls: async (currentDir) => await list(currentDir),
   cat: (file, currentDir) => cat(file, currentDir),
-  add: 'Create empty file in current working directory',
+  add: (file, currentDir) => add(file, currentDir),
   'rn path_to_file new_filename': 'Rename file',
   'cp path_to_file path_to_new_directory': 'Copy file',
   'mv path_to_file path_to_new_directory': 'Move file',
