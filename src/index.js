@@ -43,7 +43,7 @@ rl.on('line', async line => {
           printCurrentDir();
           break;
         case 'cd':
-          currentPathArr = ACTIONS[action](line.slice(3, line.length), currentPathArr);
+          currentPathArr = await ACTIONS[action](line.slice(3, line.length), currentPathArr);
           printCurrentDir();
           break;
         case 'ls':
