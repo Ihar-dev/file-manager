@@ -19,6 +19,10 @@ export const osMethods = async mode => {
       const homedir = os.homedir();
       console.log(`Home directory is ${homedir}`);
       break;
+    case 'username':
+      const username = os.userInfo().username;
+      console.log(`Current system user name is ${username}`);
+      break;
     default:
   } 
 }
