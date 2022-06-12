@@ -70,6 +70,10 @@ rl.on('line', async line => {
           ACTIONS.mv(oldFilePath, newDirName, currentDir, true);
           dirPrintMode = false;
           break;
+        case 'rm':
+            ACTIONS.rm(line.slice(3, line.length), currentDir);
+            dirPrintMode = false;
+            break;
         default:
       } 
     } else {

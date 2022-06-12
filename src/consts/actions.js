@@ -4,6 +4,7 @@ import { cat } from '../fs/cat.js';
 import { add } from '../fs/add.js';
 import { rn } from '../fs/rn.js';
 import { cp } from '../fs/cp.js';
+import { rm } from '../fs/rm.js';
 
 export const ACTIONS = {
   up: async (currentDir) => await cd('..', currentDir),
@@ -14,7 +15,7 @@ export const ACTIONS = {
   rn: (oldFileName, newFileName, currentDir) => rn(oldFileName, newFileName, currentDir),
   cp: (oldFilePath, newDirName, currentDir, moveMode) => cp(oldFilePath, newDirName, currentDir, moveMode),
   mv: (oldFilePath, newDirName, currentDir, moveMode) => cp(oldFilePath, newDirName, currentDir, moveMode),
-  'rm path_to_file': 'Delete file',
+  rm: (fileToDeletePath, currentDir) => rm(fileToDeletePath, currentDir),
   'os --EOL': 'Get EOL',
   'os --cpus': 'Get host machine CPUs info',
   'os --homedir': 'Get home directory',
