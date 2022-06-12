@@ -3,6 +3,7 @@ import { access, stat } from 'fs/promises';
 
 export const cd = async (dir, currentDir) => {
   const checkDir = async dir => {
+    let newDir = currentDir;
     try {
       await access(dir);
       const stats = await stat(dir);
@@ -15,7 +16,6 @@ export const cd = async (dir, currentDir) => {
   }
 
   dir = path.normalize(dir);
-  let newDir = currentDir;
   if (!path.isAbsolute(dir)) dir = path.join(currentDir, dir);
   return checkDir(dir);
 }

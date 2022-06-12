@@ -2,8 +2,6 @@ import * as readline from 'readline';
 
 import { getUserName } from './cli/args.js';
 import { getHomedir } from './cli/env.js';
-import { getPathArr } from './fs/pathArr.js';
-import { getPath } from './fs/path.js';
 import { COMMANDS } from './consts/commands.js';
 import { ACTIONS } from './consts/actions.js';
 
@@ -14,15 +12,11 @@ const printCommands = () => {
   });
 }
 
-const printCurrentDir = () => {
-  // currentDir = getPath(currentPathArr);
-  console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
-}
+const printCurrentDir = () => console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
 
 const userName = getUserName();
 console.log(`Welcome to the File Manager, ${userName}!`);
 let currentDir = getHomedir();
-let currentPathArr = getPathArr(currentDir);
 
 printCommands();
 printCurrentDir();
@@ -39,23 +33,21 @@ rl.on('line', async line => {
     if (ACTIONS[action]) {
       switch (action) {
         case 'up':
-          currentPathArr = ACTIONS[action](currentPathArr);
-          printCurrentDir();
+          currentDir = await ACTIONS.up(currentDir);
           break;
         case 'cd':
-          currentDir = await ACTIONS[action](line.slice(3, line.length), currentDir);
-          printCurrentDir();
+          currentDir = await ACTIONS.cd(line.slice(3, line.length), currentDir);
           break;
         case 'ls':
-          ACTIONS[action](currentDir);
+          currentDir = await ACTIONS.ls(currentDir);
           break;
         default:
 
       } 
     } else {
       console.log('\x1b[31mInvalid input');
-      printCurrentDir();
     }
+    printCurrentDir();
   }
 });
 

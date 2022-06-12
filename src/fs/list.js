@@ -2,8 +2,6 @@ import * as path from 'path';
 import { access, readdir, stat } from 'fs/promises';
 
 export const list = async currentDir => {
-  const printCurrentDir = () => console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
-
   const listDirectory = async () => {
     const files = await readdir(currentDir);
     const promiseArr = files.map(file => { return new Promise(async (resolve, reject) => {
@@ -20,13 +18,14 @@ export const list = async currentDir => {
       });
     });
     await Promise.allSettled(promiseArr);
-    printCurrentDir();
+    return currentDir;
   }
 
   try {
     await access(currentDir);
-    listDirectory();
+    return listDirectory();
   } catch {
     console.log('\x1b[31mFS operation failed');
+    return currentDir;
   } 
 };

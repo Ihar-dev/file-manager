@@ -3,9 +3,9 @@ import { list } from '../fs/list.js';
 import { cd } from '../fs/cd.js';
 
 export const ACTIONS = {
-  up: (currentPathArr) => deleteLastElement(currentPathArr),
+  up: async (currentDir) => await cd('..', currentDir),
   cd: async (dir, currentDir) => await cd(dir, currentDir),
-  ls: (currentDir) => list(currentDir),
+  ls: async (currentDir) => await list(currentDir),
   'cat path_to_file': `Read file and print it's content`,
   'add new_file_name': 'Create empty file in current working directory',
   'rn path_to_file new_filename': 'Rename file',
