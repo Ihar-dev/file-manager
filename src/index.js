@@ -27,6 +27,7 @@ const rl = readline.createInterface({
 });
 
 rl.on('line', async line => {
+  let dirPrintMode = true;
   if (line === '.exit') rl.close();
   else {
     const action = line.split(' ')[0];
@@ -41,13 +42,16 @@ rl.on('line', async line => {
         case 'ls':
           currentDir = await ACTIONS.ls(currentDir);
           break;
+        case 'cat':
+          ACTIONS.cat(line.slice(4, line.length), currentDir);
+          dirPrintMode = false;
+          break;
         default:
-
       } 
     } else {
       console.log('\x1b[31mInvalid input');
     }
-    printCurrentDir();
+    if (dirPrintMode) printCurrentDir();
   }
 });
 
