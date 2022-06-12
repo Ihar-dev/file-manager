@@ -52,7 +52,10 @@ rl.on('line', async line => {
         default:
 
       } 
-    } else console.log('\x1b[31mInvalid input');
+    } else {
+      console.log('\x1b[31mInvalid input');
+      printCurrentDir();
+    }
   }
 });
 

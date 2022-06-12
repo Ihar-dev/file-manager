@@ -1,22 +1,23 @@
 import * as path from 'path';
-import { access } from 'fs/promises';
+import { access, stat } from 'fs/promises';
 
 import { getPathArr } from './pathArr.js';
 import { deleteLastElement } from './del-last-el.js';
-import { getPath } from './path.js';
 
 export const cd = async (dir, currentPathArr) => {
 
   dir = path.normalize(dir);
-  let newDir = currentPathArr;
+  let newPathArr = currentPathArr;
   if (path.isAbsolute(dir)) {
     try {
       await access(dir);
-      newDir = getPathArr(dir);
+      const stats = await stat(dir);
+      if (stats.isDirectory()) newPathArr = getPathArr(dir);
+      else console.log('\x1b[31mIt is not a directory');
     } catch {
       console.log('\x1b[31mInvalid path input');
     }
-    return newDir;
+    return newPathArr;
   }
   else {
     if (dir === '..') {
