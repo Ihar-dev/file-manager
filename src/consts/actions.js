@@ -5,6 +5,7 @@ import { add } from '../fs/add.js';
 import { rn } from '../fs/rn.js';
 import { cp } from '../fs/cp.js';
 import { rm } from '../fs/rm.js';
+import { osMethods } from '../os/os.js';
 
 export const ACTIONS = {
   up: async (currentDir) => await cd('..', currentDir),
@@ -16,7 +17,7 @@ export const ACTIONS = {
   cp: (oldFilePath, newDirName, currentDir, moveMode) => cp(oldFilePath, newDirName, currentDir, moveMode),
   mv: (oldFilePath, newDirName, currentDir, moveMode) => cp(oldFilePath, newDirName, currentDir, moveMode),
   rm: (fileToDeletePath, currentDir) => rm(fileToDeletePath, currentDir),
-  'os --EOL': 'Get EOL',
+  os: mode => osMethods(mode),
   'os --cpus': 'Get host machine CPUs info',
   'os --homedir': 'Get home directory',
   'os --username': 'Get current system user name',

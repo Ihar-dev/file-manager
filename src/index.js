@@ -71,9 +71,12 @@ rl.on('line', async line => {
           dirPrintMode = false;
           break;
         case 'rm':
-            ACTIONS.rm(line.slice(3, line.length), currentDir);
-            dirPrintMode = false;
-            break;
+          ACTIONS.rm(line.slice(3, line.length), currentDir);
+          dirPrintMode = false;
+          break;
+        case 'os':
+          ACTIONS.os(line.slice(5, line.length));
+          break;
         default:
       } 
     } else {
