@@ -1,6 +1,5 @@
 import * as path from 'path';
 import { access, stat } from 'fs/promises';
-import { copyFile, mkdir } from 'fs/promises';
 import { unlink } from 'fs/promises';
 
 export const rm = async (fileToDeletePath, currentDir) => {
