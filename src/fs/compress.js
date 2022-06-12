@@ -15,7 +15,7 @@ export const compress = async (oldFilePath, newDirName, currentDir) => {
         recursive: true
       });
 
-      const gzip = zlib.createGzip();
+      const gzip = zlib.createBrotliCompress();
       const myReadStream = fs.createReadStream(prevFilePath);
       const myWritableStream = fs.createWriteStream(nextFilePath);
       myReadStream.pipe(gzip).pipe(myWritableStream);
