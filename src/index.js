@@ -15,7 +15,7 @@ const printCommands = () => {
 }
 
 const printCurrentDir = () => {
-  currentDir = getPath(currentPathArr);
+  // currentDir = getPath(currentPathArr);
   console.log(`\x1b[37m\nYou are currently in ${currentDir}`);
 }
 
@@ -43,7 +43,7 @@ rl.on('line', async line => {
           printCurrentDir();
           break;
         case 'cd':
-          currentPathArr = await ACTIONS[action](line.slice(3, line.length), currentPathArr);
+          currentDir = await ACTIONS[action](line.slice(3, line.length), currentDir);
           printCurrentDir();
           break;
         case 'ls':
